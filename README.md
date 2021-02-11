@@ -8,8 +8,8 @@
 
 ## Screenshots 📷
 
-<img src="images/sc1.jpg" />
-<img src="images/sc2.jpg" />
+<img src="images/ss1.jpg" />
+<img src="images/ss2.jpg" />
 
  ## Installation 🛠
  - Clone / download this repository.
