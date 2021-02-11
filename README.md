@@ -18,11 +18,11 @@
  - <b> requires XCode 12.0 + <b>
 
  
-## Includes ( ALL SWIFTUI )
-- Combine Framework
-- Firebase Auth + Database + Storage
-- Custom Modifiers
-- Image picker 
+## Frameworks
+- Combine Framework ( Form Validation )
+- Firebase Auth + Database + Storage (Chat Messages and Images)
+- Custom Modifiers (Chat Bubbles)
+- Image picker  (For selecting Images)
 
 
 
