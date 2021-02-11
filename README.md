@@ -2,25 +2,26 @@
 #### A realtime Geo Chat Application made using SwiftUI where users can chat with other users  in their proximity anonymously
 
 ## Overview 💬
-- This app can be used for realtime one to one chatting
-- data is stored in firebase database.
+- Users can chat with other users who are in the proximiy of 1 mile anonymously
+- Messages are stores in Firebase Realtime Database and images are stored in Firebase Storage
 - Supports sharing of images as well.
 
 ## Screenshots 📷
 
- 
+<img src="images/sc1.jpg" />
+<img src="images/sc2.jpg" />
+
  ## Installation 🛠
  - Clone / download this repository.
- - change the bundle identifier in project settings.
- - run the app.
- - <b> requires xcode 11.0 + <b>
+ - Change the bundle identifier in project settings.
+ - Run the app.
+ - <b> requires XCode 12.0 + <b>
 
  
 ## Includes ( ALL SWIFTUI )
 - Combine Framework
 - Firebase Auth + Database + Storage
 - Custom Modifiers
-- Animations
 - Image picker 
 
 
@@ -28,10 +29,10 @@
 
  
 ## Author
-* [Aaryan Kothari](https://github.com/aaryankotharii)
+* [Sai Nikhit Gulla](https://github.com/gsnsg)
 
 ## License
 
- Copyright 2020 Aaryan Kothari.
+ Copyright 2021 Sai Nikhit Gulla.
 
  Licensed under MIT License: https://opensource.org/licenses/MIT
