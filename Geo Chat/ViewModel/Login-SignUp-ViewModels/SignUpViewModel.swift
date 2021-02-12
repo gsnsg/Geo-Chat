@@ -146,6 +146,7 @@ final class SignUpViewModel: ObservableObject {
     
     var isUsernameValidPublisher: AnyPublisher<UsernameStatus, Never> {
         $username
+            .dropFirst()
             .debounce(for: 0.8, scheduler: RunLoop.main)
             .map {
                 if $0.count < 6 {
