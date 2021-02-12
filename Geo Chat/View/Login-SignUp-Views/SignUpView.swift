@@ -35,7 +35,7 @@ struct SignUpView: View {
             VStack {
                 Form {
                     
-                    Section(header: Text("USERNAME"),footer: Text(viewModel.usernameErrorText).foregroundColor(.red)) {
+                    Section(header: Text("USERNAME"),footer: Text(viewModel.usernameErrorStatus.rawValue).foregroundColor(.red)) {
                         TextField("Username", text: $viewModel.username)
                     }
                     Section(header: Text("Email Address"), footer: Text(viewModel.emailErrorText).foregroundColor(.red)) {

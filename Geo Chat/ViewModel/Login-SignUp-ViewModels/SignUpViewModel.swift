@@ -43,6 +43,8 @@ final class SignUpViewModel: ObservableObject {
     @Published var emailErrorText = "";
     @Published var passwordErrorText = "";
     
+    @Published var usernameErrorStatus: UsernameStatus = .available
+    
     //MARK:- User Error
     @Published var showAlert: Bool = false
     @Published var alertTitle: String = ""
@@ -55,22 +57,7 @@ final class SignUpViewModel: ObservableObject {
     //MARK:- Publishers for form fields
     private var cancellables = Set<AnyCancellable>()
     
-    var isUsernameValidPublisher: AnyPublisher<UsernameStatus, Never> {
-        $username
-            .debounce(for: 0.8, scheduler: RunLoop.main)
-            .removeDuplicates()
-            .map {
-                if $0.count < 6 {
-                    return .invalid
-                }
-                var status: UsernameStatus = .available
-                FirebaseDatabaseManager.shared.usernameExists(self.username) { (exists) in
-                    status = .unavailable
-                }
-                return status
-            }
-            .eraseToAnyPublisher()
-    }
+    
     
     var isEmailValidPublisher: AnyPublisher<EmailAddressStatus, Never> {
         $emailAddress
@@ -157,6 +144,23 @@ final class SignUpViewModel: ObservableObject {
         return passwordRegEx.evaluate(with: password)
     }
     
+    var isUsernameValidPublisher: AnyPublisher<UsernameStatus, Never> {
+        $username
+            .debounce(for: 0.8, scheduler: RunLoop.main)
+            .map {
+                if $0.count < 6 {
+                    self.usernameErrorStatus = .invalid
+                    return .invalid
+                }
+                
+                FirebaseDatabaseManager.shared.usernameExists(self.username) { [weak self] (exists) in
+                    self?.usernameErrorStatus = exists ? .unavailable : .available
+                }
+                return .available
+            }
+            .eraseToAnyPublisher()
+    }
+    
     //MARK:- Class Init
     
     init() {
@@ -164,7 +168,9 @@ final class SignUpViewModel: ObservableObject {
         isUsernameValidPublisher
             .dropFirst()
             .receive(on: RunLoop.main)
-            .map { $0.rawValue }
+            .map {
+                return $0.rawValue
+            }
             .assign(to: \.usernameErrorText, on: self)
             .store(in: &cancellables)
         

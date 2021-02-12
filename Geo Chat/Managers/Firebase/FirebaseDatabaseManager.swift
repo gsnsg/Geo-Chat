@@ -13,7 +13,6 @@ final class FirebaseDatabaseManager {
     
     private var ref = Database.database().reference()
     
-    
     static func safeEmail(emailAddress: String) -> String {
            var safeEmail = emailAddress.replacingOccurrences(of: ".", with: "-")
            safeEmail = safeEmail.replacingOccurrences(of: "@", with: "-")
@@ -22,11 +21,7 @@ final class FirebaseDatabaseManager {
     
     func usernameExists(_ username: String, completion: @escaping ((Bool) -> Void)) {
         self.ref.child("/active_usernames/\(username)").observeSingleEvent(of: .value) { (snapshot) in
-            if snapshot.exists() {
-                completion(false)
-            } else {
-                completion(true)
-            }
+            completion(snapshot.exists())
         }
     }
     
